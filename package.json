@@ -4,11 +4,10 @@
   "description": "A nodejs module for connecting a homematic CCU via XML-API addon",
   "main": "./lib/xmlApi.js",
   "types": "./lib/xmlApi.d.ts",
-  "private": true,
   "scripts": {
-    "build": "tsc",
     "start:demo": "nodemon src/index.ts",
     "test": "jest --config jestconfig.json",
+    "build": "tsc",
     "pack": "npm pack",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
