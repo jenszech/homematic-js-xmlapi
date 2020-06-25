@@ -36,11 +36,14 @@ function updateCallback(deviceList: Device[]) {
     }
 }
 ```
+More examples and details in [exampe.ts](./src/example/example.ts)
 
 ### Interfaces currently implemented
 * devicelist.cgi
 * state.cgi
 * statelist.cgi
+* sysvar.cgi
+* sysvarlist.cgi
 * version.cgi
 
 ## Further documentation

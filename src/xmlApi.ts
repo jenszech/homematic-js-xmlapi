@@ -1,6 +1,7 @@
 'use strict';
 import XmlRequest from './xmlRequest';
 import { Device } from './model/DeviceModel';
+import { SystemVariable } from './model/SystemVariableModel';
 
 export class XmlApi extends XmlRequest {
   constructor(host: string, port: number) {
@@ -23,15 +24,25 @@ export class XmlApi extends XmlRequest {
       });
   }
 
-  public getSysVarList() {
-    const response = this.get('sysvarlist.cgi').then((data) => {
-      console.log(data);
+  public getSysVarList(updateCallback: (list: SystemVariable[]) => void) {
+    if (updateCallback === null) return;
+    this.get('sysvarlist.cgi').then((data) => {
+      if (data === null) return null;
+      const sysVars = new Array<SystemVariable>();
+      for (const sysJson of data.systemVariables.systemVariable) {
+        sysVars.push(new SystemVariable(sysJson));
+      }
+      updateCallback(sysVars);
     });
   }
 
-  public getSysVar(id: string) {
+  public getSysVar(id: string, updateCallback: (list: SystemVariable[]) => void) {
+    if (updateCallback === null) return;
     this.get('sysvar.cgi?ise_id=' + id).then((data) => {
-      console.log(data);
+      if (data === null) return null;
+      const sysVars = new Array<SystemVariable>();
+      sysVars.push(new SystemVariable(data.systemVariables.systemVariable));
+      updateCallback(sysVars);
     });
   }
 
@@ -67,7 +78,9 @@ export class XmlApi extends XmlRequest {
   }
 }
 
-export { printDeviceList } from './ApiUtils';
+export { printDeviceList, printSysVarList } from './ApiUtils';
 export { Device } from './model/DeviceModel';
 export { Channel } from './model/ChannelModel';
-export { DataPoint, DataType, ValueType } from './model/DataPointModel';
+export { DataPoint } from './model/DataPointModel';
+export { SystemVariable } from './model/SystemVariableModel';
+export { DataType, ValueType } from './model/Enums';

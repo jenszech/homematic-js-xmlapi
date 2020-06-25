@@ -1,4 +1,4 @@
-import { Device } from './xmlApi';
+import { Device, SystemVariable } from './xmlApi';
 
 export function printDeviceList(deviceMap: Map<string, Device>) {
   for (const device of deviceMap.values()) {
@@ -9,5 +9,11 @@ export function printDeviceList(deviceMap: Map<string, Device>) {
         console.log('   ' + dataPoint.toString());
       }
     }
+  }
+}
+
+export function printSysVarList(sysVarMap: Map<string, SystemVariable>) {
+  for (const sysVar of sysVarMap.values()) {
+    console.log(sysVar.toString());
   }
 }

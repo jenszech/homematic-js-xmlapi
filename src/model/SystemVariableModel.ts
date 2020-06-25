@@ -1,12 +1,14 @@
 'use strict';
-import { DataType, ValueType } from './Enums';
+import { ValueType } from './Enums';
 
-export class DataPoint {
+export class SystemVariable {
   constructor(json: any) {
+    if (json === null) return;
+    this.iseId = json._attributes.ise_id;
     this.name = json._attributes.name;
-    this.iseId = json._attributes.iseId;
-    this.type = parseInt(DataType[json._attributes.type], 10);
-    this.valueType = parseInt(json._attributes.valuetype, 10);
+    this.valueList = json._attributes.value_list;
+    this.timestamp = new Date(parseInt(json._attributes.timestamp, 10) * 1000);
+    this.valueType = parseInt(json._attributes.type, 10);
     switch (this.valueType) {
       case ValueType.Bool:
         this.value = json._attributes.value === 'true';
@@ -17,23 +19,16 @@ export class DataPoint {
       default:
         this.value = json._attributes.value;
     }
-    this.timestamp = new Date(parseInt(json._attributes.timestamp, 10) * 1000);
   }
-
   name: string = '';
   iseId: string = '';
-  type: DataType = DataType.UNKNOWN;
   value: string | number | boolean | null = null;
-  valueType: ValueType = 0;
+  valueList: string = '';
+  valueType: number = 0;
   timestamp: Date | null = null;
 
   toString(): string {
-    return this.iseId + ', ' + this.name + ', ' + this.type + ', ' + this.value + ', ' + this.getNiceLastUpdatedTime();
-  }
-
-  updateValues(dataPoint: DataPoint) {
-    this.value = dataPoint.value;
-    this.timestamp = dataPoint.timestamp;
+    return this.iseId + ', ' + this.name + ', ' + this.value + ', ' + this.getNiceLastUpdatedTime();
   }
 
   getNiceLastUpdatedTime(): string {
@@ -46,5 +41,9 @@ export class DataPoint {
     };
     if (this.timestamp === null) return '';
     return this.timestamp.toLocaleDateString('de-DE', options);
+  }
+
+  updateValues(sysVar: SystemVariable) {
+    this.name = sysVar.name;
   }
 }

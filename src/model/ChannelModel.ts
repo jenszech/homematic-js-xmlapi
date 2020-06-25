@@ -1,5 +1,6 @@
 'use strict';
-import { DataPoint, DataType } from './DataPointModel';
+import { DataPoint } from './DataPointModel';
+import { DataType } from './Enums';
 
 export class Channel {
   constructor(json: any) {
