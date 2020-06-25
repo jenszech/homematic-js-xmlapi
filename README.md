@@ -4,20 +4,20 @@
 [![Issues](https://img.shields.io/github/issues/jenszech/homematic-js-xmlapi.svg)](https://github.com/hobbyquaker/XML-API/issues)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-A nodejs module for connecting a Homematic CCU with an installed XML-API addon
+A nodejs module for connecting a Homematic CCU with an installed XML-API addon.
 
-The module addresses the XML API and provides the required interfaces and data types in JS.
+The module addresses the XML API and provides the required interfaces and data types in JS. It is released as npm module under [homematic-js-xmlapi](https://www.npmjs.com/package/homematic-js-xmlapi)
 
 ## Install
-
 ```
 npm install homematic-js-xmlapi
 ```
 ## Basic Usage
 ```javascript
-import { XmlApi } from "homematic-js-xmlapi"
+import { XmlApi, Device } from 'homematic-js-xmlapi';
 
 const deviceMap:Map<string, Device> = new Map();
+// initialise the API Connection
 const xmlApi = new XmlApi("192.168.0.10", 80);
 
 xmlApi.getDeviceList(updateCallback);
@@ -26,12 +26,12 @@ xmlApi.getState("1481", updateCallback);
 
 Example of the local callback function for receiving the data
 ```javascript
-updateCallback = (deviceList: Array<Device>):void => {
+function updateCallback(deviceList: Device[]) {
     for (let device of deviceList) {
-        if (this.deviceMap.has(device.iseId)) {
+        if (deviceMap.has(device.iseId)) {
             device.updateValues(device);
         } else {
-            this.deviceMap.set(device.iseId, device);
+            deviceMap.set(device.iseId, device);
         }
     }
 }

@@ -5,7 +5,7 @@
   "main": "./lib/xmlApi.js",
   "types": "./lib/xmlApi.d.ts",
   "scripts": {
-    "start:demo": "nodemon src/index.ts",
+    "start:demo": "nodemon src/example/example.ts",
     "test": "jest --config jestconfig.json",
     "build": "tsc",
     "pack": "npm pack",

@@ -1,4 +1,4 @@
-import { XmlApi, Device } from './xmlApi';
+import { XmlApi, Device } from '../xmlApi';
 
 const deviceMap: Map<string, Device> = new Map();
 const xmlApi = new XmlApi('192.168.10.5', 80);
@@ -8,14 +8,19 @@ console.log('Get all devices ... ');
 xmlApi.getDeviceList(updateCallback);
 
 // update devices with current values
-setTimeout(updateDevices, 5000);
+//setTimeout(updateDeviceValue, 5000);
+setTimeout(updateDeviceValues, 5000);
 
 // Print all collected devices
 setTimeout(printDeviceList, 15000);
 
-function updateDevices() {
+function updateDeviceValue() {
   console.log('Collecting current values ... ');
   xmlApi.getState('1481', updateCallback);
+}
+function updateDeviceValues() {
+  console.log('Collecting current values ... ');
+  xmlApi.getStateList(updateCallback);
 }
 
 function updateCallback(deviceList: Device[]) {
