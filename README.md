@@ -46,8 +46,13 @@ More examples and details in [exampe.ts](./src/example/example.ts)
 * sysvarlist.cgi
 * version.cgi
 
-## Further documentation
+### Release a new version
+```
+npm version major|minor|patch
+npm publish
+```
 
+## Further documentation
 Homematic XML-API CCU Addon<br>
 https://github.com/jens-maus/XML-API
 
