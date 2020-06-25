@@ -8,7 +8,7 @@ console.log('Get all devices ... ');
 xmlApi.getDeviceList(updateCallback);
 
 // update devices with current values
-//setTimeout(updateDeviceValue, 5000);
+// setTimeout(updateDeviceValue, 5000);
 setTimeout(updateDeviceValues, 5000);
 
 // Print all collected devices
