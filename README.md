@@ -14,7 +14,7 @@ The module addresses the XML API and provides the required interfaces and data t
 npm install homematic-js-xmlapi
 ```
 ## Basic Usage
-```
+```javascript
 import { XmlApi } from "homematic-js-xmlapi"
 
 const deviceMap:Map<string, Device> = new Map();
@@ -25,8 +25,8 @@ xmlApi.getState("1481", updateCallback);
 ```
 
 Example of the local callback function for receiving the data
-```
-public updateCallback = (deviceList: Array<Device>):void => {
+```javascript
+updateCallback = (deviceList: Array<Device>):void => {
     for (let device of deviceList) {
         if (this.deviceMap.has(device.iseId)) {
             device.updateValues(device);
