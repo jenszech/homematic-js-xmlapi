@@ -56,7 +56,17 @@ export class XmlApi extends XmlRequest {
       updateCallback(devices);
     });
   }
+
+  public getVersion(updateCallback: (version: number) => void) {
+    if (updateCallback === null) return;
+    this.get('version.cgi').then((data) => {
+      if (data === null) return null;
+      const version = parseFloat(data.version._text);
+      updateCallback(version);
+    });
+  }
 }
+
 export { Device } from './model/DeviceModel';
 export { Channel } from './model/ChannelModel';
 export { DataPoint, DataType, ValueType } from './model/DataPointModel';

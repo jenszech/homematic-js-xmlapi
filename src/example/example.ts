@@ -5,6 +5,7 @@ const xmlApi = new XmlApi('192.168.10.5', 80);
 
 // Call initial device list
 console.log('Get all devices ... ');
+xmlApi.getVersion(versionCallback);
 xmlApi.getDeviceList(updateCallback);
 
 // update devices with current values
@@ -18,6 +19,7 @@ function updateDeviceValue() {
   console.log('Collecting current values ... ');
   xmlApi.getState('1481', updateCallback);
 }
+
 function updateDeviceValues() {
   console.log('Collecting current values ... ');
   xmlApi.getStateList(updateCallback);
@@ -32,6 +34,10 @@ function updateCallback(deviceList: Device[]) {
       deviceMap.set(device.iseId, device);
     }
   }
+}
+
+function versionCallback(version: number) {
+  console.log('XML Addon version: ', version);
 }
 
 function printDeviceList() {
