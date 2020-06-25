@@ -67,6 +67,7 @@ export class XmlApi extends XmlRequest {
   }
 }
 
+export { printDeviceList } from './ApiUtils';
 export { Device } from './model/DeviceModel';
 export { Channel } from './model/ChannelModel';
 export { DataPoint, DataType, ValueType } from './model/DataPointModel';

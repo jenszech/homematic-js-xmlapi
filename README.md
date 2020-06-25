@@ -41,6 +41,7 @@ function updateCallback(deviceList: Device[]) {
 * devicelist.cgi
 * state.cgi
 * statelist.cgi
+* version.cgi
 
 ## Further documentation
 

@@ -1,4 +1,4 @@
-import { XmlApi, Device } from '../xmlApi';
+import { XmlApi, Device, printDeviceList } from '../xmlApi';
 
 const deviceMap: Map<string, Device> = new Map();
 const xmlApi = new XmlApi('192.168.10.5', 80);
@@ -13,7 +13,7 @@ xmlApi.getDeviceList(updateCallback);
 setTimeout(updateDeviceValues, 5000);
 
 // Print all collected devices
-setTimeout(printDeviceList, 15000);
+setTimeout(print, 15000);
 
 function updateDeviceValue() {
   console.log('Collecting current values ... ');
@@ -23,6 +23,10 @@ function updateDeviceValue() {
 function updateDeviceValues() {
   console.log('Collecting current values ... ');
   xmlApi.getStateList(updateCallback);
+}
+
+function print() {
+  printDeviceList(deviceMap);
 }
 
 function updateCallback(deviceList: Device[]) {
@@ -40,14 +44,3 @@ function versionCallback(version: number) {
   console.log('XML Addon version: ', version);
 }
 
-function printDeviceList() {
-  for (const device of deviceMap.values()) {
-    console.log(device.toString());
-    for (const channel of device.channel.values()) {
-      console.log('  ' + channel.toString());
-      for (const dataPoint of channel.dataPoint.values()) {
-        console.log('   ' + dataPoint.toString());
-      }
-    }
-  }
-}
