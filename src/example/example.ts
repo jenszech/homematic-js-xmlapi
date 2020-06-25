@@ -8,7 +8,7 @@ const xmlApi = new XmlApi('192.168.10.5', 80);
 // Call initial device list
 console.log('Get all devices ... ');
 xmlApi.getVersion(versionCallback);
- xmlApi.getDeviceList(updateDeviceCallback);
+xmlApi.getDeviceList(updateDeviceCallback);
 
 // update devices with current values
 setTimeout(timerSingleValue, 5000);
