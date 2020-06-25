@@ -40,6 +40,7 @@ function updateCallback(deviceList: Device[]) {
 ### Interfaces currently implemented
 * devicelist.cgi
 * state.cgi
+* statelist.cgi
 
 ## Further documentation
 

@@ -10,12 +10,18 @@ export class Channel {
     }
 
     if (json.hasOwnProperty('datapoint')) {
-      for (const dataJson of json.datapoint) {
-        const dataPoint = new DataPoint(dataJson);
+      if (Array.isArray(json.datapoint)) {
+        for (const dataJson of json.datapoint) {
+          const dataPoint = new DataPoint(dataJson);
+          this.dataPoint.set(dataPoint.type, dataPoint);
+        }
+      } else {
+        const dataPoint = new DataPoint(json.datapoint);
         this.dataPoint.set(dataPoint.type, dataPoint);
       }
     }
   }
+
   name: string = '';
   iseId: string = '';
   address: string | null = null;
