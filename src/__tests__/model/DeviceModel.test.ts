@@ -1,4 +1,4 @@
-import { Device } from '../model/DeviceModel';
+import { Device } from '../../model/DeviceModel';
 
 const current: Date = new Date();
 const testDevice1 = {
@@ -55,6 +55,7 @@ test('Device Constructor - Empty data', () => {
   expect(device.configPending).toBe(false);
   expect(device.address).toBeNull();
   expect(device.deviceType).toBeNull();
+  expect(device.channel).toBeInstanceOf(Map);
   expect(device.channel.size).toBe(0);
 });
 

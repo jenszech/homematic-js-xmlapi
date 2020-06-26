@@ -1,5 +1,5 @@
 export enum ValueType {
-  Unkown = 0,
+  UNKOWN = 0,
   Bool = 2,
   Number = 4,
   Unkown1 = 8,

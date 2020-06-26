@@ -4,6 +4,7 @@ import { DataType } from './Enums';
 
 export class Channel {
   constructor(json: any) {
+    if (json === null) return;
     this.name = json._attributes.name;
     this.iseId = json._attributes.ise_id;
     if (json._attributes.hasOwnProperty('address')) {

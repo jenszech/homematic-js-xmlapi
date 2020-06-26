@@ -28,6 +28,7 @@
   ],
   "exclude": [
     "./src/**/*.test.ts",
+    "./src/example/",
     "./src/public/",
     "node_modules"
   ]

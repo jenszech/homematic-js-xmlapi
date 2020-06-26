@@ -3,8 +3,9 @@ import { DataType, ValueType } from './Enums';
 
 export class DataPoint {
   constructor(json: any) {
+    if (json === null) return;
     this.name = json._attributes.name;
-    this.iseId = json._attributes.iseId;
+    this.iseId = json._attributes.ise_id;
     this.type = parseInt(DataType[json._attributes.type], 10);
     this.valueType = parseInt(json._attributes.valuetype, 10);
     switch (this.valueType) {
