@@ -16,21 +16,23 @@ export class Device {
       this.deviceType = json._attributes.device_type;
     }
 
-    if (Array.isArray(json.channel)) {
-      for (const channelJson of json.channel) {
-        const channel = new Channel(channelJson);
+    if (json.hasOwnProperty('channel')) {
+      if (Array.isArray(json.channel)) {
+        for (const channelJson of json.channel) {
+          const channel = new Channel(channelJson);
+          this.channel.set(channel.iseId, channel);
+        }
+      } else {
+        const channel = new Channel(json.channel);
         this.channel.set(channel.iseId, channel);
       }
-    } else {
-      const channel = new Channel(json.channel);
-      this.channel.set(channel.iseId, channel);
     }
   }
   name: string = '';
   iseId: string = '';
   unreach: boolean = false;
-  stickyUnreach = false;
-  configPending = false;
+  stickyUnreach: boolean = false;
+  configPending: boolean = false;
   address: string | null = null;
   deviceType: string | null = null;
   channel: Map<string, Channel> = new Map();

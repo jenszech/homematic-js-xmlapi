@@ -16,16 +16,20 @@ npm install homematic-js-xmlapi
 ```javascript
 import { XmlApi, Device } from 'homematic-js-xmlapi';
 
-const deviceMap:Map<string, Device> = new Map();
 // initialise the API Connection
 const xmlApi = new XmlApi("192.168.0.10", 80);
 
+// get all devices 
 xmlApi.getDeviceList(updateCallback);
+
+// get single state value 
 xmlApi.getState("1481", updateCallback);
 ```
 
 Example of the local callback function for receiving the data
 ```javascript
+const deviceMap:Map<string, Device> = new Map();
+
 function updateCallback(deviceList: Device[]) {
     for (let device of deviceList) {
         if (deviceMap.has(device.iseId)) {
