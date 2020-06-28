@@ -29,7 +29,7 @@ test('XmlRequest.get - failed fetch', async () => {
   const xmlApi = new XmlRequest('1.1.1.1', 80);
   fetch.mockReject(new Error('fake error message'));
   return xmlApi
-    .get2('version.cgi')
+    .get('version.cgi')
     .then((data) => {
       console.log(data);
     })
@@ -44,7 +44,7 @@ test('XmlRequest.get - wrong response type', async () => {
   const xmlApi = new XmlRequest('1.1.1.1', 80);
   expect.assertions(3);
   return xmlApi
-    .get2('version.cgi')
+    .get('version.cgi')
     .then((data) => {
       console.log(data);
     })
@@ -59,7 +59,7 @@ test('XmlRequest.get - Bad Request', async () => {
   const xmlApi = new XmlRequest('1.1.1.1', 80);
   fetch.mockResponseOnce(JSON.stringify({ data: 'bad data' }), { status: 400 });
   return xmlApi
-    .get2('version.cgi')
+    .get('version.cgi')
     .then((data) => {
       console.log(data);
     })
@@ -81,7 +81,7 @@ test('XmlRequest.get - Success', async () => {
   const options = { headers: headers };
   fetch.mockResponseOnce(dataXml, options);
   return xmlApi
-    .get2('version.cgi')
+    .get('version.cgi')
     .then((data) => {
       expect(JSON.stringify(data)).toBe(JSON.stringify(dataJson));
       expect(fetch.mock.calls.length).toEqual(1);

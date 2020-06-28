@@ -34,7 +34,7 @@ export class XmlRequest {
       });
   }
 
-  public get2(endpoint: string): Promise<any> {
+  public get(endpoint: string): Promise<any> {
     return this.fetchData(endpoint).then((response) => {
       return convert.xml2js(response, { compact: true });
     });
