@@ -15,6 +15,17 @@ const testDataPoint1 = {
     timestamp: '' + currentTs,
   },
 };
+const testDataPoint2 = {
+  _attributes: {
+    name: 'Sensor.CONFIG_PENDING',
+    type: 'CONFIG_PENDING',
+    ise_id: '1121',
+    value: 'true',
+    valuetype: '2',
+    valueunit: '',
+    timestamp: '' + currentTs,
+  },
+};
 
 test('DataPoint Constructor - Empty data', () => {
   const dataPoint = new DataPoint(null);
@@ -26,7 +37,7 @@ test('DataPoint Constructor - Empty data', () => {
   expect(dataPoint.timestamp).toBeNull();
 });
 
-test('DataPoint Constructor - parse json', () => {
+test('DataPoint Constructor - parse json with number', () => {
   const dataPoint = new DataPoint(testDataPoint1);
   expect(dataPoint.name).toBe('Sensor.TEMPERATURE');
   expect(dataPoint.iseId).toBe('1121');
@@ -36,7 +47,15 @@ test('DataPoint Constructor - parse json', () => {
   expect(dataPoint.timestamp?.getTime()).toBe(currentTs * 1000);
 });
 
-test('DataPoint updateValues - update value', () => {
+test('DataPoint Constructor - parse json with bool', () => {
+  const dataPoint = new DataPoint(testDataPoint2);
+  expect(dataPoint.type).toBe(DataType.CONFIG_PENDING);
+  expect(dataPoint.valueType).toBe(ValueType.Bool);
+  expect(dataPoint.value).toBe(true);
+  expect(dataPoint.timestamp?.getTime()).toBe(currentTs * 1000);
+});
+
+test('DataPoint.updateValues - update value', () => {
   const dataPoint = new DataPoint(testDataPoint1);
   const dataPoint2 = new DataPoint(testDataPoint1);
   expect(dataPoint.value).toBe(25.1);
@@ -50,4 +69,11 @@ test('DataPoint updateValues - update value', () => {
 
   expect(dataPoint.value).toBe(22.0);
   expect(dataPoint.timestamp?.getTime()).toBe(date2.getTime());
+});
+
+test('DataPoint.toString', () => {
+  const dataPoint = new DataPoint(testDataPoint1);
+  dataPoint.timestamp = new Date('2020-12-31T20:30:00');
+  const expectStr = '1121, Sensor.TEMPERATURE, 11, 25.1, 2020-12-31 20:30';
+  expect(dataPoint.toString()).toBe(expectStr);
 });

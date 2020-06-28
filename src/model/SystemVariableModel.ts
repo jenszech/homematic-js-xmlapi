@@ -44,6 +44,7 @@ export class SystemVariable {
   }
 
   updateValues(sysVar: SystemVariable) {
-    this.name = sysVar.name;
+    this.value = sysVar.value;
+    this.timestamp = sysVar.timestamp;
   }
 }

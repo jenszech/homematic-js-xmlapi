@@ -1,4 +1,5 @@
 import { Device } from '../../model/DeviceModel';
+import { DataPoint } from '../../model/DataPointModel';
 
 const current: Date = new Date();
 const testDevice1 = {
@@ -44,6 +45,27 @@ const testDevice2 = {
     address: 'ABCD1234',
     device_type: 'ABCD',
   },
+  channel: {
+    _attributes: { name: 'Sensor:0', ise_id: '1112', address: 'FGHI1234' },
+  },
+};
+
+const testDevice3 = {
+  _attributes: {
+    name: 'Sensor',
+    ise_id: '1111',
+    unreach: 'true',
+    sticky_unreach: 'false',
+    config_pending: 'true',
+  },
+  channel: [
+    {
+      _attributes: { name: 'Sensor:0', ise_id: '1112', address: 'FGHI1234' },
+    },
+    {
+      _attributes: { name: 'Sensor:1', ise_id: '1113', address: 'JKLM1234' },
+    },
+  ],
 };
 
 test('Device Constructor - Empty data', () => {
@@ -76,7 +98,7 @@ test('Device Constructor - parse json', () => {
   expect(device2.deviceType).toBe('ABCD');
 });
 
-test('Device Constructor - Update Values', () => {
+test('Device.updateValues', () => {
   const device = new Device(testDevice1);
   expect(device.address).toBeNull();
   expect(device.deviceType).toBeNull();
@@ -85,4 +107,16 @@ test('Device Constructor - Update Values', () => {
   device.updateValues(device2);
   expect(device.address).toBe('ABCD1234');
   expect(device.deviceType).toBe('ABCD');
+
+  const device3 = new Device(testDevice3);
+  device.updateValues(device3);
+  expect(device.channel.size).toBe(2);
+});
+
+test('Device.toString', () => {
+  const device = new Device(testDevice1);
+  device.address = 'ABC';
+  device.deviceType = 'DEF';
+  const expectStr = '1111, Sensor, ABC, DEF, Channels:1';
+  expect(device.toString()).toBe(expectStr);
 });
