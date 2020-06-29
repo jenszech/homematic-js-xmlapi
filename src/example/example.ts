@@ -6,29 +6,38 @@ const sysMap: Map<string, SystemVariable> = new Map();
 const xmlApi = new XmlApi('192.168.10.5', 80);
 
 // Call initial device list
-console.log('Get all devices ... ');
-xmlApi.getVersion(versionCallback);
-xmlApi.getDeviceList(updateDeviceCallback);
+console.log('Get XML Addon Verion ... ');
+xmlApi.getVersion().then((version) => {
+  console.log('XML Addon version: ', version);
+});
 
-// update devices with current values
-setTimeout(timerSingleValue, 5000);
-setTimeout(timerListValues, 10000);
+console.log('Get all devices ... ');
+xmlApi.getDeviceList().then((deviceList) => {
+  if (deviceList) updateDeviceMap(deviceList);
+});
+
+console.log('Get device values ... ');
+xmlApi.getState('1481').then((deviceList) => {
+  if (deviceList) updateDeviceMap(deviceList);
+});
+
+xmlApi.getStateList().then((deviceList) => {
+  if (deviceList) updateDeviceMap(deviceList);
+});
+
+console.log('Get SystemVariable values ... ');
+xmlApi.getSysVar('7264').then((sysVarList) => {
+  if (sysVarList) updateSysVarList(sysVarList);
+});
+
+xmlApi.getSysVarList().then((sysVarList) => {
+  if (sysVarList) updateSysVarList(sysVarList);
+});
 
 // Print all collected devices
-setTimeout(print, 15000);
+setTimeout(print, 10000);
 
-function timerSingleValue() {
-  console.log('Collecting current value ... ');
-  xmlApi.getState('1481', updateDeviceCallback);
-  xmlApi.getSysVar('7264', updateSysVarCallback);
-}
-
-function timerListValues() {
-  console.log('Collecting current values ... ');
-  xmlApi.getStateList(updateDeviceCallback);
-  xmlApi.getSysVarList(updateSysVarCallback);
-}
-
+// Helper Functions ------------------------------------
 function print() {
   console.log('Print Devices ...');
   printDeviceList(deviceMap);
@@ -37,8 +46,8 @@ function print() {
   printSysVarList(sysMap);
 }
 
-function updateDeviceCallback(deviceList: Device[]) {
-  console.log('... UpdateList');
+function updateDeviceMap(deviceList: Device[]) {
+  console.log('... UpdateList with ' + deviceList.length + ' values');
   for (const device of deviceList) {
     if (deviceMap.has(device.iseId)) {
       deviceMap.get(device.iseId)?.updateValues(device);
@@ -48,8 +57,8 @@ function updateDeviceCallback(deviceList: Device[]) {
   }
 }
 
-function updateSysVarCallback(sysVarList: SystemVariable[]) {
-  console.log('... Update SysVar List');
+function updateSysVarList(sysVarList: SystemVariable[]) {
+  console.log('... Update SysVarList with ' + sysVarList.length + ' values');
   for (const sysVar of sysVarList) {
     if (sysMap.has(sysVar.iseId)) {
       sysMap.get(sysVar.iseId)?.updateValues(sysVar);
@@ -57,8 +66,4 @@ function updateSysVarCallback(sysVarList: SystemVariable[]) {
       sysMap.set(sysVar.iseId, sysVar);
     }
   }
-}
-
-function versionCallback(version: number) {
-  console.log('XML Addon version: ', version);
 }
