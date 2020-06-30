@@ -20,10 +20,14 @@ import { XmlApi, Device } from 'homematic-js-xmlapi';
 const xmlApi = new XmlApi("192.168.0.10", 80);
 
 // get all devices 
-xmlApi.getDeviceList(updateCallback);
+xmlApi.getDeviceList().then((deviceList) => {
+  if (deviceList) updateDeviceMap(deviceList);
+});
 
 // get single state value 
-xmlApi.getState("1481", updateCallback);
+xmlApi.getState('1481').then((deviceList) => {
+  if (deviceList) updateDeviceMap(deviceList);
+});
 ```
 
 Example of the local callback function for receiving the data
