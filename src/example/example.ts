@@ -15,16 +15,16 @@ xmlApi.getVersion().then((version) => {
 
 console.log('Get all devices ... ');
 xmlApi.getDeviceList().then((deviceList) => {
-  if (deviceList) deviceMgr.updateDeviceMap(deviceList);
+  if (deviceList) deviceMgr.updateDeviceList(deviceList);
 });
 
 console.log('Get device values ... ');
 xmlApi.getState('1481').then((deviceList) => {
-  if (deviceList) deviceMgr.updateDeviceMap(deviceList);
+  if (deviceList) deviceMgr.updateDeviceList(deviceList);
 });
 
 xmlApi.getStateList().then((deviceList) => {
-  if (deviceList) deviceMgr.updateDeviceMap(deviceList);
+  if (deviceList) deviceMgr.updateDeviceList(deviceList);
 });
 
 console.log('Get SystemVariable values ... ');
