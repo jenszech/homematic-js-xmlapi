@@ -68,9 +68,10 @@ export class XmlApi extends XmlRequest {
   }
 }
 
-export { printDeviceList, printSysVarList } from './ApiUtils';
 export { Device } from './model/DeviceModel';
 export { Channel } from './model/ChannelModel';
 export { DataPoint } from './model/DataPointModel';
 export { SystemVariable } from './model/SystemVariableModel';
 export { DataType, ValueType } from './model/Enums';
+export { DeviceManager } from './DeviceManager';
+export { SystemVariableManager } from './SystemVariableManager';
