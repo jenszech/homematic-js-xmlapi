@@ -74,6 +74,6 @@ test('DataPoint.updateValues - update value', () => {
 test('DataPoint.toString', () => {
   const dataPoint = new DataPoint(testDataPoint1);
   dataPoint.timestamp = new Date('2020-12-31T20:30:00');
-  const expectStr = '1121, Sensor.TEMPERATURE, 11, 25.1, 2020-12-31 20:30';
+  const expectStr = '1121, Sensor.TEMPERATURE, 28, 25.1, 2020-12-31 20:30';
   expect(dataPoint.toString()).toBe(expectStr);
 });

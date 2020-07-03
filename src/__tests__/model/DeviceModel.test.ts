@@ -108,6 +108,10 @@ test('Device.updateValues', () => {
   expect(device.address).toBe('ABCD1234');
   expect(device.deviceType).toBe('ABCD');
 
+  device2.deviceType = 'DCBA';
+  device.updateValues(device2);
+  expect(device.deviceType).toBe('ABCD');
+
   const device3 = new Device(testDevice3);
   device.updateValues(device3);
   expect(device.channel.size).toBe(2);
