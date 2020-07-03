@@ -1,6 +1,6 @@
 {
   "name": "homematic-js-xmlapi",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A nodejs module for connecting a homematic CCU via XML-API addon",
   "main": "./lib/xmlApi.js",
   "types": "./lib/xmlApi.d.ts",
