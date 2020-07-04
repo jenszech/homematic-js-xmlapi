@@ -72,6 +72,8 @@ export { Device } from './model/DeviceModel';
 export { Channel } from './model/ChannelModel';
 export { DataPoint } from './model/DataPointModel';
 export { SystemVariable } from './model/SystemVariableModel';
+export { VariableStatistic } from './model/SysVarStatisticModel';
+export { DeviceStatistic } from './model/DeviceStatisticModel';
 export { DataType, ValueType } from './model/Enums';
 export { DeviceManager } from './DeviceManager';
 export { SystemVariableManager } from './SystemVariableManager';
