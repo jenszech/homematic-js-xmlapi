@@ -54,7 +54,11 @@ function updateDeviceList(deviceList: Device[]) {
     }
 }
 ```
+### More Examples
 More examples and details in [exampe.ts](./src/example/example.ts)
+
+You can also check my own project for detailed usage example and inspiration<b> 
+https://github.com/jenszech/hm-node-runner
 
 ## Dokumentation
 ### Klassen
