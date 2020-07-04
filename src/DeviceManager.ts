@@ -2,12 +2,15 @@
 import { Device } from './model/DeviceModel';
 import { Channel } from './model/ChannelModel';
 import { DataType } from './model/Enums';
+import { DeviceStatistic } from './model/DeviceStatisticModel';
 
 export class DeviceManager {
   private deviceMap: Map<string, Device> = new Map();
+  private statistic = new DeviceStatistic();
 
-  public mapCount() {
-    return this.deviceMap.size;
+  public getStatistic(): DeviceStatistic {
+    this.updateStatistic();
+    return this.statistic;
   }
 
   public updateDeviceList(deviceList: Device[]) {
@@ -15,6 +18,8 @@ export class DeviceManager {
       for (const device of deviceList) {
         this.updateDevice(device);
       }
+      this.statistic.lastUpdateCount = deviceList.length;
+      this.statistic.lastUpdateTime = new Date();
     }
   }
 
@@ -24,6 +29,8 @@ export class DeviceManager {
     } else {
       this.deviceMap.set(device.iseId, device);
     }
+    this.statistic.lastUpdateCount = 1;
+    this.statistic.lastUpdateTime = new Date();
   }
 
   public getDeviceByName(name: string): Device | null {
@@ -81,5 +88,19 @@ export class DeviceManager {
     for (const [key, value] of deviceTypes) {
       console.log(value, key);
     }
+  }
+
+  private updateStatistic() {
+    let countChannel = 0;
+    let countData = 0;
+    for (const device of this.deviceMap.values()) {
+      countChannel += device.channel.size;
+      for (const channel of device.channel.values()) {
+        countData += channel.dataPoint.size;
+      }
+    }
+    this.statistic.deviceCount = this.deviceMap.size;
+    this.statistic.channelCount = countChannel;
+    this.statistic.datapointCount = countData;
   }
 }

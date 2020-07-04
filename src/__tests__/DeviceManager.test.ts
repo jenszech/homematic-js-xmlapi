@@ -9,50 +9,57 @@ beforeEach(() => {
   log.mockReset();
 });
 
-test('DeviceManager.mapCount - Success', () => {
+test('DeviceManager.getStatistic - Success', () => {
   const devMgr = new DeviceManager();
-  expect(devMgr.mapCount()).toBe(0);
+  expect(devMgr.getStatistic().deviceCount).toBe(0);
+  expect(devMgr.getStatistic().channelCount).toBe(0);
+  expect(devMgr.getStatistic().datapointCount).toBe(0);
   let dev1 = new Device(getDeviceListObj.deviceList.device[0]);
   devMgr.updateDevice(dev1);
-  expect(devMgr.mapCount()).toBe(1);
+  expect(devMgr.getStatistic().deviceCount).toBe(1);
+  expect(devMgr.getStatistic().channelCount).toBe(6);
+  expect(devMgr.getStatistic().datapointCount).toBe(0);
+
   let dev2 = new Device(getDeviceListObj.deviceList.device[1]);
   devMgr.updateDevice(dev2);
-  expect(devMgr.mapCount()).toBe(2);
+  expect(devMgr.getStatistic().deviceCount).toBe(2);
+  expect(devMgr.getStatistic().channelCount).toBe(7);
+  expect(devMgr.getStatistic().datapointCount).toBe(0);
 });
 
 test('DeviceManager.updateDevice - Add', () => {
   const devMgr = new DeviceManager();
-  expect(devMgr.mapCount()).toBe(0);
+  expect(devMgr.getStatistic().deviceCount).toBe(0);
   const dev1 = new Device(getDeviceListObj.deviceList.device[0]);
   devMgr.updateDevice(dev1);
-  expect(devMgr.mapCount()).toBe(1);
+  expect(devMgr.getStatistic().deviceCount).toBe(1);
   devMgr.updateDevice(dev1);
-  expect(devMgr.mapCount()).toBe(1);
+  expect(devMgr.getStatistic().deviceCount).toBe(1);
 });
 
 test('DeviceManager.updateDeviceFromList - Add', () => {
   const devMgr = new DeviceManager();
   const list = new Array<Device>();
-  expect(devMgr.mapCount()).toBe(0);
+  expect(devMgr.getStatistic().deviceCount).toBe(0);
   list.push(new Device(getDeviceListObj.deviceList.device[0]));
   list.push(new Device(getDeviceListObj.deviceList.device[1]));
   list.push(new Device(getStateListObj.stateList.device[0]));
 
   devMgr.updateDeviceList(list);
-  expect(devMgr.mapCount()).toBe(3);
+  expect(devMgr.getStatistic().deviceCount).toBe(3);
 
   devMgr.updateDeviceList(list);
-  expect(devMgr.mapCount()).toBe(3);
+  expect(devMgr.getStatistic().deviceCount).toBe(3);
 
   list.push(new Device(getStateListObj.stateList.device[1]));
   devMgr.updateDeviceList(list);
-  expect(devMgr.mapCount()).toBe(4);
+  expect(devMgr.getStatistic().deviceCount).toBe(4);
 });
 
 test('DeviceManager.getDeviceByName', () => {
   const devMgr = new DeviceManager();
   const list = new Array<Device>();
-  expect(devMgr.mapCount()).toBe(0);
+  expect(devMgr.getStatistic().deviceCount).toBe(0);
 
   list.push(new Device(getDeviceListObj.deviceList.device[0]));
   list.push(new Device(getDeviceListObj.deviceList.device[1]));
@@ -60,7 +67,7 @@ test('DeviceManager.getDeviceByName', () => {
   list.push(new Device(getStateListObj.stateList.device[1]));
   devMgr.updateDeviceList(list);
 
-  expect(devMgr.mapCount()).toBe(4);
+  expect(devMgr.getStatistic().deviceCount).toBe(4);
   expect(devMgr.getDeviceByName(list[1].name)?.iseId).toBe('11753');
 
   expect(devMgr.getDeviceByName('NotFound')).toBeNull();
@@ -69,7 +76,7 @@ test('DeviceManager.getDeviceByName', () => {
 test('DeviceManager.getChannelByName', () => {
   const devMgr = new DeviceManager();
   const list = new Array<Device>();
-  expect(devMgr.mapCount()).toBe(0);
+  expect(devMgr.getStatistic().deviceCount).toBe(0);
 
   list.push(new Device(getDeviceListObj.deviceList.device[0]));
   list.push(new Device(getDeviceListObj.deviceList.device[1]));
@@ -77,7 +84,7 @@ test('DeviceManager.getChannelByName', () => {
   list.push(new Device(getStateListObj.stateList.device[1]));
   devMgr.updateDeviceList(list);
 
-  expect(devMgr.mapCount()).toBe(4);
+  expect(devMgr.getStatistic().deviceCount).toBe(4);
   expect(devMgr.getChannelByName('Sensor.EG.Kueche')?.iseId).toBe('1501');
 
   expect(devMgr.getChannelByName('NotFound')).toBeNull();
@@ -86,7 +93,7 @@ test('DeviceManager.getChannelByName', () => {
 test('DeviceManager.getValueByTyp', () => {
   const devMgr = new DeviceManager();
   const list = new Array<Device>();
-  expect(devMgr.mapCount()).toBe(0);
+  expect(devMgr.getStatistic().deviceCount).toBe(0);
 
   const channel = new Channel(getStateObj.state.device.channel[0]);
 
@@ -100,7 +107,7 @@ test('DeviceManager.printDeviceList - Success', () => {
   const devMgr = new DeviceManager();
 
   const list = new Array<Device>();
-  expect(devMgr.mapCount()).toBe(0);
+  expect(devMgr.getStatistic().deviceCount).toBe(0);
   expect(log.mock.calls.length).toBe(0);
 
   list.push(new Device(getDeviceListObj.deviceList.device[0]));
@@ -111,7 +118,7 @@ test('DeviceManager.printDeviceList - Success', () => {
 
   devMgr.printDeviceList();
 
-  expect(devMgr.mapCount()).toBe(4);
+  expect(devMgr.getStatistic().deviceCount).toBe(4);
   expect(log.mock.calls.length).toBe(26);
 });
 
@@ -120,7 +127,7 @@ test('DeviceManager.printDeviceTypes - Success', () => {
   const devMgr = new DeviceManager();
 
   const list = new Array<Device>();
-  expect(devMgr.mapCount()).toBe(0);
+  expect(devMgr.getStatistic().deviceCount).toBe(0);
   expect(log.mock.calls.length).toBe(0);
 
   list.push(new Device(getDeviceListObj.deviceList.device[0]));
@@ -131,6 +138,6 @@ test('DeviceManager.printDeviceTypes - Success', () => {
 
   devMgr.printDeviceTypes();
 
-  expect(devMgr.mapCount()).toBe(4);
+  expect(devMgr.getStatistic().deviceCount).toBe(4);
   expect(log.mock.calls.length).toBe(3);
 });

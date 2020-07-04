@@ -1,11 +1,14 @@
 'use strict';
 import { SystemVariable } from './model/SystemVariableModel';
+import { VariableStatistic } from './model/SysVarStatisticModel';
+import { DeviceStatistic } from './model/DeviceStatisticModel';
 
 export class SystemVariableManager {
   private sysMap: Map<string, SystemVariable> = new Map();
+  private statistic = new VariableStatistic();
 
-  public mapCount() {
-    return this.sysMap.size;
+  public getStatistic(): VariableStatistic {
+    return this.statistic;
   }
 
   public updateSysVarList(sysVarList: SystemVariable[]) {
@@ -13,6 +16,7 @@ export class SystemVariableManager {
       for (const sysVar of sysVarList) {
         this.updateSysVar(sysVar);
       }
+      this.updateStatistic(this.sysMap.size);
     }
   }
 
@@ -22,6 +26,7 @@ export class SystemVariableManager {
     } else {
       this.sysMap.set(sysVar.iseId, sysVar);
     }
+    this.updateStatistic(this.sysMap.size);
   }
 
   public getVariableByName(name: string): SystemVariable | null {
@@ -37,5 +42,11 @@ export class SystemVariableManager {
     for (const sysVar of this.sysMap.values()) {
       console.log(sysVar.toString());
     }
+  }
+
+  private updateStatistic(count: number) {
+    this.statistic.lastUpdateCount = count;
+    this.statistic.lastUpdateTime = new Date();
+    this.statistic.variableCount = this.sysMap.size;
   }
 }

@@ -14,9 +14,14 @@ xmlApi.getVersion().then((version) => {
 });
 
 console.log('Get all devices ... ');
-xmlApi.getDeviceList().then((deviceList) => {
-  if (deviceList) deviceMgr.updateDeviceList(deviceList);
-});
+xmlApi
+  .getDeviceList()
+  .then((deviceList) => {
+    if (deviceList) deviceMgr.updateDeviceList(deviceList);
+  })
+  .catch((error) => {
+    console.log('ERROR:', error);
+  });
 
 console.log('Get device values ... ');
 xmlApi.getState('1481').then((deviceList) => {
