@@ -67,13 +67,13 @@ https://github.com/jenszech/hm-node-runner
 The XmlApi class provides the XML connector for the homematic xml addon. The class provides a separate function for each call, which returns a corresponding JS data object.
 
 Constructor usage
-```Javascript
+```javascript
 import {XmlApi} from "homematic-js-xmlapi";
 const xmlApi = new XmlApi("1.1.1.1", 80);
 ```
 
 Api functions
-```Javascript
+```javascript
 import { DeviceManager } from 'homematic-js-xmlapi';
 
 // Get XML Addon Verion
@@ -114,13 +114,13 @@ xmlApi.getSysVarList().then((sysVarList) => {
 ```
 #### DeviceManager
 Constructor usage
-```Javascript
+```javascript
 import { DeviceManager } from 'homematic-js-xmlapi';
 const devMgr = new DeviceManager();
 ```
 
 Api functions
-```Javascript
+```javascript
 // Add or Update a single Device
 // Parameter: Device
 devMgr.updateDevice(device);
@@ -157,13 +157,13 @@ devMgr.printDeviceTypes();
  
 #### SystemVariableManager
 Constructor usage
-```Javascript
+```javascript
 import { SystemVariableManager } from 'homematic-js-xmlapi';
 const sysMgr = new SystemVariableManager();
 ```
 
 Api functions
-```Javascript
+```javascript
 // Add or Update a single Variable
 // Parameter: SystemVariable
 sysMgr.updateDevice(sysVar);
