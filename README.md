@@ -12,6 +12,7 @@ The module addresses the XML API and provides the required interfaces and data t
 * devicelist.cgi
 * state.cgi
 * statelist.cgi
+* statechange.cgi
 * sysvar.cgi
 * sysvarlist.cgi
 * version.cgi

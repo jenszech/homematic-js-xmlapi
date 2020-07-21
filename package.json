@@ -15,13 +15,13 @@
     "prepare": "npm run build",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags && npm run build && npm run format"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jenszech/homematic-js-xmlapi.git"
   },
-  "keywords": [],
+  "keywords": ["homematic", "ccu", "xml", "npm", "module"],
   "author": "Jens Zech <jzech@gmx.de> (https://github.com/jenszech)",
   "license": "MIT",
   "bugs": {

@@ -39,5 +39,11 @@ export class XmlRequest {
       return convert.xml2js(response, { compact: true });
     });
   }
+
+  public set(endpoint: string): Promise<any> {
+    return this.fetchData(endpoint).then((response) => {
+      return convert.xml2js(response, { compact: true });
+    });
+  }
 }
 export default XmlRequest;

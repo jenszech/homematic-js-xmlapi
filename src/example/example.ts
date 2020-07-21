@@ -41,6 +41,11 @@ xmlApi.getSysVarList().then((sysVarList) => {
   if (sysVarList) sysMgr.updateSysVarList(sysVarList);
 });
 
+console.log('Set Value ... ');
+xmlApi.setState('8503', 'test').then((changed) => {
+  console.log('changed: ' + changed);
+});
+
 // Print all collected devices
 setTimeout(print, 10000);
 

@@ -52,11 +52,19 @@ export class XmlApi extends XmlRequest {
 
   public getState(id: string): Promise<Device[] | null> {
     return this.get('state.cgi?device_id=' + id).then((data) => {
-      if (data === null) return null;
+      if (data === null || data.state.device === null) return null;
       const devices = new Array<Device>();
       devices.push(new Device(data.state.device));
       return devices;
     });
+  }
+
+  public setState(id: string, value: number | string): Promise<boolean> {
+    return this.set('statechange.cgi?ise_id=' + id + '&new_value=' + value).then((data) => {
+      if (!(data && data.result && data.result.changed && data.result.changed._attributes)) return false;
+      return data.result.changed._attributes.id === id;
+    });
+    Promise.reject();
   }
 
   public getVersion(): Promise<number | null> {
