@@ -1,7 +1,6 @@
 'use strict';
 import { SystemVariable } from './model/SystemVariableModel';
 import { VariableStatistic } from './model/SysVarStatisticModel';
-import { DeviceStatistic } from './model/DeviceStatisticModel';
 
 export class SystemVariableManager {
   private sysMap: Map<string, SystemVariable> = new Map();
