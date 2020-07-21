@@ -1,6 +1,6 @@
 {
   "name": "homematic-js-xmlapi",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "A nodejs module for connecting a homematic CCU via XML-API addon",
   "main": "./lib/xmlApi.js",
   "types": "./lib/xmlApi.d.ts",
@@ -21,7 +21,13 @@
     "type": "git",
     "url": "git+https://github.com/jenszech/homematic-js-xmlapi.git"
   },
-  "keywords": ["homematic", "ccu", "xml", "npm", "module"],
+  "keywords": [
+    "homematic",
+    "ccu",
+    "xml",
+    "npm",
+    "module"
+  ],
   "author": "Jens Zech <jzech@gmx.de> (https://github.com/jenszech)",
   "license": "MIT",
   "bugs": {
