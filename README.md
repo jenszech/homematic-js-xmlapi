@@ -1,7 +1,10 @@
 # homematic-js-xmlapi
-[![Release](https://img.shields.io/github/release/jenszech/homematic-js-xmlapi.svg)](https://github.com/jenszech/homematic-js-xmlapi/releases/latest)
+[![NPM](https://nodei.co/npm/homematic-js-xmlapi.png)](https://nodei.co/npm/homematic-js-xmlapi/)
+
+[![Release](https://img.shields.io/github/release/jenszech/homematic-js-xmlapi.svg)](https://github.com/hobbyquaker/XML-API/releases/latest)
 [![npm version](https://badge.fury.io/js/homematic-js-xmlapi.svg)](https://badge.fury.io/js/homematic-js-xmlapi)
-[![Issues](https://img.shields.io/github/issues/jenszech/homematic-js-xmlapi.svg)](https://github.com/hobbyquaker/XML-API/issues)
+[![Downloads](https://img.shields.io/npm/dm/homematic-js-xmlapi.svg?maxAge=2592000)](https://www.npmjs.com/package/homematic-js-xmlapi)
+[![Issues](https://img.shields.io/github/issues/jenszech/homematic-js-xmlapi.svg)](https://github.com/jzech/homematic-js-xmlapi/issues)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 A nodejs module for connecting a Homematic CCU with an installed XML-API addon.
