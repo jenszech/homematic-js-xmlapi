@@ -62,6 +62,10 @@ export class DeviceManager {
     return null;
   }
 
+  public getDevicesRaw(): Map<string, Device> {
+    return this.deviceMap;
+  }
+
   public printDeviceList() {
     for (const device of this.deviceMap.values()) {
       console.log(device.toString());

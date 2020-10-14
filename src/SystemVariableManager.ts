@@ -45,6 +45,9 @@ export class SystemVariableManager {
   public getVariablesAsJson(): string {
     return JSON.stringify(Array.from(this.sysMap.entries()));
   }
+  public getVariablesRaw(): Map<string, SystemVariable> {
+    return this.sysMap;
+  }
 
   private updateStatistic(count: number) {
     this.statistic.lastUpdateCount = count;
