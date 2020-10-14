@@ -26,7 +26,7 @@ The module addresses the XML API and provides the required interfaces and data t
 npm install homematic-js-xmlapi
 ```
 ### Basic Usage
-```javascript
+```typescript
 import { XmlApi, DeviceManager } from 'homematic-js-xmlapi';
 
 // initialise the API Connection
@@ -45,7 +45,7 @@ xmlApi.getState('1481').then((deviceList) => {
 ```
 
 Example of the update implementation for receiving the data without using DeviceManager
-```javascript
+```typescript
 const deviceMap:Map<string, Device> = new Map();
 
 function updateDeviceList(deviceList: Device[]) {

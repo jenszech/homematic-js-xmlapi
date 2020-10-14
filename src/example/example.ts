@@ -56,4 +56,7 @@ function print() {
 
   console.log('Print Variables ...');
   sysMgr.printSysVarList();
+
+  console.log('Print Variables JSON...');
+  console.log(sysMgr.getVariablesAsJson());
 }

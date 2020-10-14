@@ -42,6 +42,9 @@ export class SystemVariableManager {
       console.log(sysVar.toString());
     }
   }
+  public getVariablesAsJson(): string {
+    return JSON.stringify(Array.from(this.sysMap.entries()));
+  }
 
   private updateStatistic(count: number) {
     this.statistic.lastUpdateCount = count;
