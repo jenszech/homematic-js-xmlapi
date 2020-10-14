@@ -86,6 +86,6 @@ test('SystemVariable.updateValues - update value', () => {
 test('SystemVariable.toString', () => {
   const sysVar = new SystemVariable(testSysVar1);
   sysVar.timestamp = new Date('2020-12-31T20:30:00');
-  const expectStr = '1121, Sensor.TEMPERATURE, 25.1, 2020-12-31 20:30';
+  const expectStr = '1121, Sensor.TEMPERATURE, 25.1, 31.12.2020, 20:30';
   expect(sysVar.toString()).toBe(expectStr);
 });
