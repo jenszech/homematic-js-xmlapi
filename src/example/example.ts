@@ -1,5 +1,4 @@
 import { XmlApi } from '../xmlApi';
-
 import { DeviceManager } from '../DeviceManager';
 import { SystemVariableManager } from '../SystemVariableManager';
 
